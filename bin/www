@@ -7,7 +7,6 @@
 
 var app = require('../app');
 const webSocket = require('../routes/webSocket');
-var ws = require('../routes/webSocket');
 var debug = require('debug')('ndt-ws:server');
 var http = require('http');
 
@@ -24,7 +23,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-webSocket(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
