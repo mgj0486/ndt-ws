@@ -13,9 +13,7 @@ sockserver.on('connection', ws => {
 
   ws.on('message', data => {
     sockserver.clients.forEach(client => {
-       console.log(`${data}`)
        var asdf = JSON.parse(data);
-       console.log(asdf.message);
        client.send(`${asdf.message}`)
     })
   })
