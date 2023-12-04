@@ -12,9 +12,13 @@ sockserver.on('connection', ws => {
   )
 
   ws.on('message', data => {
+    var json = JSON.parse(data);
     sockserver.clients.forEach(client => {
-       var asdf = JSON.parse(data);
-       client.send(`${asdf.message}`)
+       if (json.message == undefined) {
+        client.send(`${json}`)
+       } else {
+        client.send(`${json.message}`)
+       }
     })
   })
 
