@@ -48,7 +48,7 @@ sockserver.on('connection', ws => {
           temp: arr[22],
           humi: arr[23]
         }
-      }
+      } 
       const jsonData = JSON.stringify(data);
       sockserver.clients.forEach(client => {
         client.send(jsonData) 
