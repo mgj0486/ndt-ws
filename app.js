@@ -13,13 +13,53 @@ sockserver.on('connection', ws => {
 
   ws.on('message', data => {
     var json = JSON.parse(data);
-    sockserver.clients.forEach(client => {
-       if (json.message == undefined) {
-        client.send(`${json}`)
-       } else {
-        client.send(`${json.message}`)
-       }
-    })
+    if (json.message != undefined) {
+      let str = json.message;
+      let arr = str.split("  ");
+      
+      const data = {
+        num : arr[0],
+        status: {
+          burb: arr[1],
+          bellStatus: arr[2],
+          led: arr[3],
+          hpmc: arr[4],
+          alert: arr[5],
+          bellWork: arr[6],
+          shockValue: arr[7],
+          detectNum: arr[8]
+        },
+        battery: {
+          ess: arr[9],
+          hpmcV: arr[10],
+          hpmcI: arr[11],
+          solarV: arr[12],
+          solarI: arr[13]
+        },
+        env: {
+          grimm1_0: arr[14],
+          grimm2_5: arr[15],
+          grimm10: arr[16],
+          vocNow: arr[17],
+          vocRef: arr[18],
+          vocPer: arr[19],
+          voclev: arr[20],
+          co2: arr[21],
+          temp: arr[22],
+          humi: arr[23]
+        }
+      }
+      const jsonData = JSON.stringify(data);
+      sockserver.clients.forEach(client => {
+        client.send(jsonData) 
+      })
+    } else {
+      if (json.controll != undefined) {
+        sockserver.clients.forEach(client => {
+          client.send(`${json.controll}`) 
+        })
+      }
+    }
   })
 
   ws.onerror = function () {
