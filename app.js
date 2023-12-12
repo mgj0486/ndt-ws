@@ -65,7 +65,8 @@ sockserver.on('connection', ws => {
     } else {
       if (json.controll != undefined) {
         sockserver.clients.forEach(client => {
-          client.send(`${json.controll}`) 
+          const jsonData = JSON.stringify(json);
+          client.send(jsonData)
         })
       }
     }
