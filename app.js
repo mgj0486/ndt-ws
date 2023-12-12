@@ -20,7 +20,7 @@ sockserver.on('connection', ws => {
         sockserver.clients.forEach(client => {
           const err = {
             error: 'data not correct',
-            content: str
+            message: str
           }
           const jsonData = JSON.stringify(err);
           client.send(jsonData) 
