@@ -19,7 +19,8 @@ sockserver.on('connection', ws => {
       if (arr.length !== 24) {
         sockserver.clients.forEach(client => {
           const err = {
-            error: 'data not correct'
+            error: 'data not correct',
+            content: str
           }
           const jsonData = JSON.stringify(err);
           client.send(jsonData) 
