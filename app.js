@@ -15,7 +15,11 @@ sockserver.on('connection', ws => {
     var json = JSON.parse(data);
     if (json.message != undefined) {
       let str = json.message;
-      let arr = str.split("  ");
+
+      while(str.includes('  ')) {
+        str = str.replace('  ', ' ');
+      }
+      let arr = str.split(" ");
       if (arr.length !== 24) {
         sockserver.clients.forEach(client => {
           const err = {
