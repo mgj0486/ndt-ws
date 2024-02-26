@@ -2,7 +2,7 @@ const express = require('express')
 const webserver = express()
  .listen(3000, () => console.log(`Listening on ${3000}`))
 const { WebSocketServer } = require('ws')
-const sockserver = new WebSocketServer({ port: 8000 })
+const sockserver = new WebSocketServer({ port: 8080 })
 
 sockserver.on('connection', ws => {
   ws.send('connection successed')
